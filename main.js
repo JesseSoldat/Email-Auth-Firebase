@@ -9,7 +9,7 @@ function toggleSignIn(){
 			return;
 		}
 		if(password.length < 4){
-			alert('Your password must be 5 characters or more.');
+			alert('Please enter a valid password.');
 			return;
 		}
 		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error){
@@ -27,6 +27,32 @@ function toggleSignIn(){
 		});
 		document.getElementById('sign-in').disabled = true;
 	}
+}
+
+function handleSignUp(){
+	var email = document.getElementById('email').value;
+	var password = document.getElementById('password').value;
+
+	if(email.length < 4) {
+		alert('Please enter a valid email address.');
+		return;
+	}
+	if(password.length < 4) {
+		alert('Your password must be at least 5 characters.');
+		return;
+	}
+
+	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+		var errorCode = error.code;
+		var errorMessage = error.message;
+
+		if (errorCode == 'auth/weak-password') {
+			alert('The password is too weak.');
+		} else {
+			alert(errorMessage);
+		}
+		console.log(errorCode);
+	});
 }
 
 function initApp(){
@@ -68,6 +94,8 @@ function initApp(){
 	}); //onAuthStateChanged
 
 	document.getElementById('sign-in').addEventListener('click', toggleSignIn, false);
+
+	document.getElementById('sign-up').addEventListener('click', handleSignUp, false);
 
 }
 
