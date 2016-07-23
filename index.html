@@ -2,6 +2,20 @@
 <html>
 <head>
 	<title>Email Auth</title>
+
+	
+<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC13s6NIjaAWhRzeWbj_M8jxYL4Tm0SFro",
+    authDomain: "anonymous-authentication-d957a.firebaseapp.com",
+    databaseURL: "https://anonymous-authentication-d957a.firebaseio.com",
+    storageBucket: "anonymous-authentication-d957a.appspot.com",
+  };
+  firebase.initializeApp(config);
+</script>
+    
 </head>
 <body>
 <h3>Email Auth</h3>
@@ -15,6 +29,13 @@
 <button id="verify-email">Send Email Verification</button>
 &nbsp;&nbsp;&nbsp;
 <button id="password-reset">Password Reset Email</button>
+<br><br>
+<div>
+	Firebase sign-in status: <span id="sign-in-status">Unknown</span>
+	<br><br>
+	<div>Firebase auth <code>currentUser</code> object value:</div>
+	<pre><code id="account-details">null</code></pre>
+</div>
 
 
 <script src="main.js"></script>
