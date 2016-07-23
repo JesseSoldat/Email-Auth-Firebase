@@ -55,6 +55,12 @@ function handleSignUp(){
 	});
 }
 
+function emailVerification(){
+	firebase.auth().currentUser.sendEmailVerification().then(function(){
+		console.log('Email Sent!');
+	});
+}
+
 function initApp(){
 	firebase.auth().onAuthStateChanged(function(user){
 		document.getElementById('verify-email').disabled = true;
@@ -96,6 +102,8 @@ function initApp(){
 	document.getElementById('sign-in').addEventListener('click', toggleSignIn, false);
 
 	document.getElementById('sign-up').addEventListener('click', handleSignUp, false);
+
+	document.getElementById('verify-email').addEventListener('click', emailVerification, false);
 
 }
 
