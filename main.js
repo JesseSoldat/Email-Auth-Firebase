@@ -61,6 +61,23 @@ function emailVerification(){
 	});
 }
 
+function passwordReset(){
+	var email = document.getElementById('email').value;
+
+	firebase.auth().sendPasswordResetEmail(email).then(function(){
+		console.log('Password Reset');
+	}).catch(function(error){
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		if(errorCode === 'auth/invalid-email') {
+			alert('Invalid Email');
+		} else if (errorCode === 'auth/user-not-found') {
+			alert(errorMessage);
+		}
+		console.log(error);
+	});
+}
+
 function initApp(){
 	firebase.auth().onAuthStateChanged(function(user){
 		document.getElementById('verify-email').disabled = true;
@@ -104,6 +121,8 @@ function initApp(){
 	document.getElementById('sign-up').addEventListener('click', handleSignUp, false);
 
 	document.getElementById('verify-email').addEventListener('click', emailVerification, false);
+
+	document.getElementById('password-reset').addEventListener('click', passwordReset, false);
 
 }
 
